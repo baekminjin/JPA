@@ -17,6 +17,10 @@ public class BaseinitDate {
 	@Bean
 	public ApplicationRunner baseInitDataApplicationRunner() {
 		return args -> {
+			//0보다 크면 리턴
+			if ( postService.count() > 0 ) return;
+
+			//한 번만 생성되도록
 			Post post1 = postService.write("title1", "content1");
 			System.out.println(post1.getId() + "번 글이 생성됨");
 			Post post2 = postService.write("title2", "content2");
