@@ -5,6 +5,8 @@ import com.mysite.jpa.domain.post.post.repository.PostRepository;
 import com.mysite.jpa.standard.util.Ut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -40,6 +42,7 @@ public class PostService {
 	public void modify(Post post, String title, String content) {
 		post.setTitle(title);
 		post.setContent(content);
-		postRepository.save(post);
 	}
+	//save()를 하지 않고 트랜잭션을 추가한다.
+
 }

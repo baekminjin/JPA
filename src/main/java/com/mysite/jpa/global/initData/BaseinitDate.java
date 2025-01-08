@@ -5,10 +5,12 @@ import com.mysite.jpa.domain.post.post.service.PostService;
 
 import com.mysite.jpa.standard.util.Ut;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.transaction.annotation.Transactional;
 
 //초기 설정
 @Configuration
@@ -34,11 +36,18 @@ public class BaseinitDate {
 	@Bean
 	@Order(2)
 	public ApplicationRunner baseInitData2ApplicationRunner() {
-		return args -> {
-			Ut.thread.sleep(1000); //1초 뒤
+		return new ApplicationRunner() {
+			//트랜잭션이 닫힐 때 변경된 것이 있다면 자동으로 DB에 반영한다.
+			//더티 체킹 -> 데이터가 변경됐을 때
+			@Transactional
+			@Override
+			public void run(ApplicationArguments args) throws Exception {
+				Ut.thread.sleep(1000);
 
-			Post post1 = postService.findById(1).get();
-			postService.modify(post1, "title1-1", "content1-1");
+				Post post1 = postService.findById(1).get();
+				postService.modify(post1, "title1-1", "content1-1");
+			}
 		};
 	}
 }
+
