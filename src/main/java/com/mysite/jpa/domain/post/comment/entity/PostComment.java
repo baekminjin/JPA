@@ -1,6 +1,7 @@
 package com.mysite.jpa.domain.post.comment.entity;
 
 
+import com.mysite.jpa.domain.post.post.entity.Post;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -37,5 +38,6 @@ public class PostComment {
 
 	private boolean blind;
 
-	private long postId;
+	@ManyToOne
+	private Post post;
 }

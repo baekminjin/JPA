@@ -2,10 +2,8 @@ package com.mysite.jpa.domain.post.post.service;
 
 import com.mysite.jpa.domain.post.post.entity.Post;
 import com.mysite.jpa.domain.post.post.repository.PostRepository;
-import com.mysite.jpa.standard.util.Ut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
