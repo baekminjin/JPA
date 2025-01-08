@@ -38,6 +38,6 @@ public class PostComment {
 
 	private boolean blind;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY) //미리 가져오지 않고 필요할 때만 가져온다.
 	private Post post;
 }
