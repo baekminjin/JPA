@@ -43,6 +43,10 @@ public class PostService {
 		post.setTitle(title);
 		post.setContent(content);
 	}
-	//save()를 하지 않고 트랜잭션을 추가한다.
+
+	public void delete(Post post) {
+		postRepository.delete(post);
+	}
+
 
 }

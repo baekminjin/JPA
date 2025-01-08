@@ -36,17 +36,10 @@ public class BaseinitDate {
 	@Bean
 	@Order(2)
 	public ApplicationRunner baseInitData2ApplicationRunner() {
-		return new ApplicationRunner() {
-			//트랜잭션이 닫힐 때 변경된 것이 있다면 자동으로 DB에 반영한다.
-			//더티 체킹 -> 데이터가 변경됐을 때
-			@Transactional
-			@Override
-			public void run(ApplicationArguments args) throws Exception {
-				Ut.thread.sleep(1000);
-
-				Post post1 = postService.findById(1).get();
-				postService.modify(post1, "title1-1", "content1-1");
-			}
+		return args ->  {
+			Post post4 = postService.write("title3", "content4");
+            //한 번 매겨진 번호는 재사용하지 않는다.
+			postService.delete(post4);
 		};
 	}
 }
