@@ -3,6 +3,7 @@ package com.mysite.jpa.global.initData;
 import com.mysite.jpa.domain.post.post.entity.Post;
 import com.mysite.jpa.domain.post.post.service.PostService;
 
+import com.mysite.jpa.standard.util.Ut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +35,10 @@ public class BaseinitDate {
 	@Order(2)
 	public ApplicationRunner baseInitData2ApplicationRunner() {
 		return args -> {
+			Ut.thread.sleep(1000); //1초 뒤
+
 			Post post1 = postService.findById(1).get();
+			postService.modify(post1, "title1-1", "content1-1");
 		};
 	}
 }
